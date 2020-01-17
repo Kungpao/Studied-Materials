@@ -1,0 +1,79 @@
+#include<iostream>
+#include<conio.h>
+
+
+using namespace std;
+
+
+void main()
+{
+	setlocale(LC_ALL, "Rus");
+	int year, month, day;
+
+	cout << "Введите день, месяц и год: ";
+	cin >> day >> month >> year;
+
+	int s1 = (year - 1) * 365 + (year - 1) / 4 + (year - 1) / 400 - (year - 1) / 100;
+	int f = (((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0)) ? 29 : 28;
+
+	switch (month)
+	{
+	case 1: s1 += day;
+		break;
+	case 2: s1 += 31 + day;
+		break;
+	case 3: s1 += 31 + f + day;
+		break;
+	case 4: s1 += 62 + f + day;
+		break;
+	case 5: s1 += 92 + f + day;
+		break;
+	case 6: s1 += 123 + f + day;
+		break;
+	case 7: s1 += 153 + f + day;
+		break;
+	case 8: s1 += 184 + f + day;
+		break;
+	case 9: s1 += 215 + f + day;
+		break;
+	case 10: s1 += 245 + f + day;
+		break;
+	case 11: s1 += 276 + f + day;
+		break;
+	case 12: s1 += 306 + f + day;
+	}
+
+	cout << "Введите день, месяц и год: ";
+	cin >> day >> month >> year;
+
+	int s2 = (year - 1) * 365 + (year - 1) / 4 + (year - 1) / 400 - (year - 1) / 100;
+    f = (((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0)) ? 29 : 28;
+
+	switch (month)
+	{
+	case 1: s2 += day;
+		break;
+	case 2: s2 += 31 + day;
+		break;
+	case 3: s2 += 31 + f + day;
+		break;
+	case 4: s2 += 62 + f + day;
+		break;
+	case 5: s2 += 92 + f + day;
+		break;
+	case 6: s2 += 123 + f + day;
+		break;
+	case 7: s2 += 153 + f + day;
+		break;
+	case 8: s2 += 184 + f + day;
+		break;
+	case 9: s2 += 215 + f + day;
+		break;
+	case 10: s2 += 245 + f + day;
+		break;
+	case 11: s2 += 276 + f + day;
+		break;
+	case 12: s2 += 306 + f + day;
+	}
+	cout << "Разница в днях: " << s2 - s1 << "\n";
+}
