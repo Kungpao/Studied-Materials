@@ -1,0 +1,68 @@
+#include "stdafx.h"
+
+#include <string.h>
+
+#include <conio.h>
+
+//_stricmp() - case insensetive version of strcmp()
+
+int main()
+
+{
+  // initializing variables  
+  
+	// pointers for strings
+	const char *password = "Pa$$w0rd";
+
+	const char *password1 = "pa$$w0rd";
+
+	const char *password2 = "Pa$$w0rd";
+
+	const char *password3 = "pa$$";
+	
+	//int variable for function return value show
+	int cmp = 0;
+
+  //show initial string values
+	printf("%s\n%s\n%s\n%s\n\n",password, password1, password2, password3);
+
+	printf("Password checking with _stricmp()..\n\n");
+
+  // -------using _stricmp()-----------
+	printf("password and password1: ");
+	cmp = _stricmp(password, password1);
+	printf("%d \n", cmp);
+
+	cmp = 0;
+	printf("password and password2: ");
+	cmp = _stricmp(password, password2);
+	printf("%d \n", cmp);
+
+	cmp = 0;
+	printf("password and password3: ");
+	cmp = _stricmp(password, password3);
+	printf("%d \n\n", cmp);
+
+	//-------using strcmp()--------------
+
+	printf("Password checking with strcmp()..\n\n");
+
+	printf("password and password1: ");
+	cmp = strcmp(password, password1);
+	printf("%d \n", cmp);
+
+	cmp = 0;
+	printf("password and password2: ");
+	cmp = strcmp(password, password2);
+	printf("%d \n", cmp);
+
+	cmp = 0;
+	printf("password and password3: ");
+	cmp = strcmp(password, password3);
+	printf("%d \n\n", cmp);
+
+	return(0);
+
+}
+
+
