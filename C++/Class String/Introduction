@@ -1,0 +1,29 @@
+#include "stdafx.h"
+#include <string.h>
+
+int _tmain(int argc, _TCHAR* argv[])
+{
+
+	const char *STR1 = "Hello"; // Stirng pointer
+	const char STR2[] = "Hello"; // const symbolic array
+	char str2[] = "Hello"; // symbolic array
+	const char STR3[] = { 'h','e','l','l','o' }; // const symbolic array
+	char str3[] = { 'h', 'e', 'l', 'l', 'o' };//  symbolic array
+	char buff[200] = { 0 }; //empty symbolic array
+	    // example *1
+    	//char buf[100] = { 0 };
+	    //gets_s(buf, sizeof(buf)); выводит обратно текст что был написан но не более buf[100]символов
+	    //printf("%s\n", buf);
+
+	    // example *2
+	    //char buf[100] = { 0 };
+	    //scanf_s("%s", buf, sizeof(buf));// Читает до первого пробела ! (это плохо)
+	    //printf("%s", buf);
+		
+  //waiting for keyboard symbol entry  getc :   int getc(FILE*);
+  
+	int c = getc(stdin);
+	printf("%c", (char)c);
+	return 0;
+
+}
