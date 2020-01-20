@@ -1,3 +1,5 @@
+--------------------------------------#1------------------------
+
 #include "stdafx.h"
 
 #include <string.h>
@@ -65,4 +67,32 @@ int main()
 
 }
 
+--------------------------------------------#2------------------------------------
 
+#include "stdafx.h"
+
+#include <string.h>
+
+#include <conio.h>
+
+//Returns a pointer to the first occurrence of character in the C string str.
+
+//The terminating null-character is considered part of the C string. Therefore,
+//it can also be located in order to retrieve a pointer to the end of a string.
+
+const char *strchr(const char *str, int ch);  
+
+
+int main()
+
+{
+	const char *str = "Search string hello world\n";
+	const char *F = strchr(str, 'l');
+
+	printf("%s\n\n", F);
+
+
+
+	return(0);
+
+}
