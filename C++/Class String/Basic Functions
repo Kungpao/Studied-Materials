@@ -82,6 +82,8 @@ int main()
 
 const char *strchr(const char *str, int ch);  
 
+const char *strrchr(const char *str, int ch); // same but search order is from behind
+
 
 int main()
 
@@ -96,3 +98,34 @@ int main()
 	return(0);
 
 }
+
+
+--------------------------------------------#3------------------------------------
+#include "stdafx.h"
+
+#include <string.h>
+
+#include <conio.h>
+#include <stdlib.h>
+
+
+
+/*atoi(const char *str);*/ // This function accepts a string and converts it into an integer.For example, 
+//if "1234" is passed into the function, it will return 1234, an integer.If the string contains
+//a decimal place, the number will be truncated.
+
+
+int main()
+
+{
+	const char *s = "123";
+	int i = atoi(s);
+
+	printf("%d\n", i);
+
+
+
+	return(0);
+
+}
+
