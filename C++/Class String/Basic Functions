@@ -110,22 +110,64 @@ int main()
 
 
 
-/*atoi(const char *str);*/ // This function accepts a string and converts it into an integer.For example, 
+/*int atoi(const char *str);*/
+// This function accepts a string and converts it into an integer.For example, 
 //if "1234" is passed into the function, it will return 1234, an integer.If the string contains
 //a decimal place, the number will be truncated.
 
+
+//double atof(const char *str); 
+// .. to double
+
+//errno_t _itoa_s(int value, char *str, size_t sizeStr, int radix);
+//int to string
 
 int main()
 
 {
 	const char *s = "123";
 	int i = atoi(s);
-
 	printf("%d\n", i);
-
+	
+	//const char *s = "123";
+	//double d = atof(s);
+	//printf("%lf\n",d);
+	
+	//int a = 123;
+	//char buf[10] = { 0 };
+	//_itoa_s(a, buf, sizeof(buf) - 1, 10);
+	//printf("%s\n",buf);
 
 
 	return(0);
 
 }
 
+--------------------------------------------#3------------------------------------
+
+#include "stdafx.h"
+#include <string.h>
+#include <conio.h>
+#include <stdlib.h>
+
+//const char*strtok_s(char*str, const char*delim, char **context) - The strtok_s family of functions finds the next token in str. 
+//The set of characters in delimiters specifies possible delimiters of the token to be found in str on the current call. 
+//wcstok_s and _mbstok_s are wide-character and multibyte-character versions of strtok_s. 
+//The arguments and return values of wcstok_s and _wcstok_s_l are wide-character strings;
+//those of _mbstok_s and _mbstok_s_l are multibyte-character strings. These functions behave identically otherwise.
+//This function validates its parameters. 
+
+int main()
+
+{
+	char buf[] = { "One Two Three Four" };
+	char *context = 0;
+	const char *D = " ";
+	const char *F = strtok_s(buf, D, &context);
+	while (F)
+	{
+		printf("%s\n", F);
+		F = strtok_s(0, D, &context);
+	}
+	return(0);
+}
