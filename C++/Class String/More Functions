@@ -1,0 +1,94 @@
+--------------------------------#1-----------------------------------------------
+
+#include "stdafx.h"
+#include <string.h>
+#include <conio.h>
+
+int main()
+{
+	const char *STR = "Hello";
+	char buf[10] = { 0 };
+  
+  // copy string 
+	strcpy_s(buf, sizeof(buf) - 1, STR); 
+	printf("Original %s, copie %s", STR, buf);
+
+	return 0;
+}
+
+--------------------------------#2-----------------------------------------------
+
+
+#include "stdafx.h"
+#include <string.h>
+
+int main()
+{
+	int Code = 0;
+  
+  // char input
+	Code = getchar();
+	printf("%c", (char)Code);
+
+    return 0;
+}
+
+
+--------------------------------#3-----------------------------------------------
+
+#include "stdafx.h"
+#include <string.h>
+#include <conio.h>
+
+int main()
+{
+	int a = 7;
+	float f = 22;
+	char c = 'T';
+	const char *STR = "Hello";
+	unsigned d = 3;
+	char buf[100] = { 0 };
+  
+  //format different types to string
+	sprintf_s(buf, sizeof(buf), "%d,%f,%c<%s,%u\0", a, f, c, STR, d);
+	printf("%s\n", buf);
+	
+    return 0;
+}
+
+--------------------------------#4-----------------------------------------------
+
+#include "stdafx.h"
+#include <string.h>
+#include <conio.h>
+
+int main()
+{
+	char str1[20] = { "Hello " };
+	const char *STR2 = "World";
+  
+  //function of adding string to each other
+	strcat_s(str1, 20 -6 - 1, STR2);
+	printf("%s\n", str1);
+	
+    return 0;
+}
+
+--------------------------------#5-----------------------------------------------
+
+#include "stdafx.h"
+#include <string.h>
+#include <conio.h>
+
+
+int main()
+{
+	char buf[20] = { "Hello" };
+	buf[19] = 'T';
+  
+  //counting size of the string
+	printf("String size = %d\n", strnlen(buf, sizeof(buf)));
+
+	return 0;
+}
+
