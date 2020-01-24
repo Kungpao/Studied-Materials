@@ -1,0 +1,156 @@
+#1:
+Написать программу, которая просит ввести первое число и второе. Принимает их в виде строки,
+перевод в целые числа и выводит на консоль сумму двух введенных чисел.
+
+Make a programm to ask for two numbers, saves it as line, converts to a number and showing the sum result
+
+#include "stdafx.h"
+#include <string.h>
+#include <conio.h>
+#include <stdlib.h>
+
+int main()
+{
+	//asking user for a numbers and saving it to char[]
+	printf("Enter two numbers:\n");
+	char Number1[20] = { 0 };
+	gets_s(Number1, sizeof(Number1));
+	char Number2[20] = { 0 };
+	gets_s(Number2, sizeof(Number2));
+
+	//converting to int
+	int i = atoi(Number1);
+	int a = atoi(Number2);
+
+	//showing result to a user
+	printf("%d + %d = %d\n", i, a, i + a);
+
+	return(0);
+}
+
+---------------------------------------------------------------------------------------------------------
+#2:
+Написать программу, которая просит ввести первое число и второе.
+Принимаеи как целые числа, вычисляет ихнюю сумму, переводит первое,
+второе и результат вычисления суммы в строки и выводит на консоль строку типа: число1+число2=результат.
+
+Make a programm to ask for two numbers. Saves it as numbers, making sum result, converting numbers and sum to line and showing to 
+user a Number1+Number2=Sum
+
+#include "stdafx.h"
+#include <string.h>
+#include <conio.h>
+#include <stdlib.h>
+
+int main()
+{
+	//Asking user for numbers and saving it to int
+	printf("Enter two numbers:\n");
+	int Number1 = 0;
+	scanf_s("%d", &Number1);
+	int Number2 = 0;
+	scanf_s("%d", &Number2);
+	
+	//Making error check for input
+	if (!Number1 || !Number2)
+	{
+		printf("Number1 or Number2 you entered is not a number! Start again");
+		getchar();
+		return 0;
+	}
+
+	//Making sum result
+	int Sum = Number1 + Number2;
+	char StrokeSum[20] = { 0 };
+	char StrokeNumber1[20] = { 0 };
+	char StrokeNumber2[20] = { 0 };
+
+	//Converting numbers to a string formats.
+	_itoa_s(Sum, StrokeSum, sizeof(StrokeSum) - 1, 10);
+	_itoa_s(Number1, StrokeNumber1, sizeof(StrokeNumber1) - 1, 10);
+	_itoa_s(Number2, StrokeNumber2, sizeof(StrokeNumber2) - 1, 10);
+
+	//Showing result 
+	printf("%s +%s = %s \n", StrokeNumber1, StrokeNumber2, StrokeSum);
+
+	return(0);
+
+}
+
+-----------------------------------------------------------------------------------------------------------------------------
+//#3.
+Написать программу, которая выводит на консоль любую строку текст и просит пользователя ввести индекс
+//начала копирования подстроки и конец.Копирует указанный диапозон во временный динамический массив и выводит на консоль.
+//Обязвательно проверка ввода пользователей индексов, чтоб не вылетать за пределы.
+//
+//Make a programm, which will show some line for a user then asks for end and start index to make a substring. 
+//save user input as line. convert to numeric format. Copy substring to a dynamic array and show it to user.
+//not forget to checks for possible errors.
+
+
+
+#include "stdafx.h"
+#include <string.h>
+#include <conio.h>
+#include <stdlib.h>
+
+int main()
+{
+	// making and showing the string
+	const char *STR = { "Hello World and prise the sun" };
+	printf("%s\n", STR);
+
+	//asking user to enter indexes, saving it as char[]
+	printf("strlen(STR) = %d\nEnter index of the start and the end of substring ( No letters or other weird symbols here please ). Program will show it to you:\n");
+	char UserStartString[10] = { 0 };
+	char UserEndString[10] = { 0 };
+	printf("Enter a single number for Start index:\n");
+	gets_s(UserStartString, sizeof(UserStartString));
+	printf("Next, enter a single number for End Index:\n");
+	gets_s(UserEndString, sizeof(UserEndString));
+	printf("Done! Formating enter data to int..\n");
+
+	// converting char[] to int
+	const int USER_START_INT = atoi(UserStartString);
+	const int USER_END_INT = atoi(UserEndString);
+
+	//checking for array range errors in input
+	if ((USER_START_INT < 0 || USER_START_INT >strlen(STR)) || (USER_END_INT <0 || USER_END_INT>strlen(STR)))
+	{
+		printf("Error! UserEnterValue != strlen(STR)!\n");
+		getchar();
+		return 0;
+	}
+	
+	//making temp dyn array to hold substring for user.  '+1' here is for '\0' 
+	int TempStrSize = USER_END_INT - USER_START_INT + 1;
+	printf("Starting symbol is:  '%c', Ending symbol is: '%c'\n", STR[USER_START_INT], STR[USER_END_INT]);
+	char *TempStr = new char[TempStrSize+1];
+
+	// checking for memory error
+	if (!TempStr)
+	{
+		printf("Error! char *TempStr = new char[TempStrSize+1];");
+		getchar();
+		return 0;
+	}
+	
+	// copying substring to temp dyn array
+	for (int i = USER_START_INT, j = 0; i <= USER_END_INT; i++,j++)
+	{
+			TempStr[j] = STR[i];			
+	}	
+
+	// putting end of line symbol '\0' 
+	TempStr[TempStrSize] = '\0';
+
+	// Showing result of work to a user
+	printf("Your string is: '%s'\n", TempStr);
+
+	// clearing after dyn memory usage
+	delete[] TempStr;
+	TempStr = NULL;
+
+	return(0);
+}
+
