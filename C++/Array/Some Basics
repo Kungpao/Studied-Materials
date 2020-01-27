@@ -1,0 +1,54 @@
+int _tmain(int argc, _TCHAR* argv[])
+{
+
+		//making array
+		long lmas[] = { 22, 33, 44, 77, 88, 99 };
+
+		//Showing it to the user
+		printf("Your array is:\n");
+		for (int i = 0; i < sizeof(lmas) / sizeof(long); i++)
+		{
+			printf("%d ", lmas[i]);
+		}
+		printf("\n\n");
+
+		//Simple copy
+		long value = lmas[3];
+
+		//Copy by using memcpy_s()
+		long value1 = 0;
+		memcpy_s(&value1, sizeof(long), &lmas[3], sizeof(long));
+
+		//Showing user result 
+		printf("value = lmas[3] ->%d\nvalue1 = memcpy_s(&value1, sizeof(long), &lmas[3], sizeof(long)) ->%d\n", value, value1);
+
+	return 0;
+}
+
+---------------------------------------#2-----------------------------------------------
+
+int _tmain(int argc, _TCHAR* argv[])
+{
+		char buf[5] = { 0 };
+
+		// using for avoid overflow for a char arrayor a string
+		std::cin.getline(buf, sizeof(buf)); 
+		std::cout << buf;
+	return 0;
+}
+
+---------------------------------------#3-----------------------------------------------
+
+int _tmain(int argc, _TCHAR* argv[])
+{
+		// making array
+		short mas[] = { 77, 88, 99 }; 
+
+		// making a pointer for same array
+		short *pmas = &mas[sizeof(mas) / sizeof(short) - 1]; 
+
+		// showing array to the console by utilizing pointer end decrement
+		for (int i = 0; i < sizeof(mas) / sizeof(short); i++, pmas--) 
+			printf("%d ", *pmas);
+	return 0;
+}
