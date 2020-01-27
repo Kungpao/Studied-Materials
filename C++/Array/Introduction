@@ -1,0 +1,78 @@
+#include "stdafx.h"
+#include <locale.h>
+#include <conio.h>
+#include <stdlib.h>
+#include <malloc.h>
+#include <memory.h>
+
+int _tmain(int argc, _TCHAR* argv[])
+{
+	// For using kirilica
+	setlocale(LC_ALL, "RUS"); 
+
+	// variable to use for exit the programm when finished.
+	int exit = 0; 
+
+	// Restarting programm until ESC button is pressed in the end
+	while (exit != 27) 
+	{
+		//asking user for size of array, saving it
+		printf("Enter array size: \n");
+		int size = 0;
+		scanf_s("%d", &size);
+
+		//trying to make dynamic array. C style. 
+		int*pvi = (int*)malloc(size*sizeof(int));
+		if (!pvi)
+		{
+			printf("Error malloc\n");
+			_getch();
+			return 0;
+		}
+
+		//asking user to enter some numbers
+		printf("Enter some numbers to fill the array:\n");
+		for (int i = 0; i < size; i++)
+		{
+			scanf_s("%d", &pvi[i]);
+		}
+
+		//showing resulting array to the user
+		printf("Your array is:\n");
+		for (int i = 0; i < size; i++)
+		{
+			printf("%d ", pvi[i]);
+		}
+		printf("\n");
+
+		//buble sort
+		printf("\nSorting it with a buble sort algorithm..\n");
+		for (int i = 1; i<size; i++)
+		{
+			int tempvalue = pvi[i];
+
+			for (int j = i - 1; j >= 0 && tempvalue<pvi[j]; j--)
+			{
+				pvi[j + 1] = pvi[j];
+				pvi[j] = tempvalue;
+			}
+		}
+		
+		//showing result to the user
+		printf("\nDone! Your array after the sort is:\n");
+		for (int i = 0; i<size; i++)
+			printf("%d ", pvi[i]);
+		printf("\n");
+		
+		//cleaning after memory use
+		free(pvi);
+		pvi = NULL;
+
+		// делаем кнопку выхода из програмы на энтер
+		printf("\nPress any key to start again or ESC to exit:\n");
+		exit = _getch(); 
+		if (exit != 27)
+			system("CLS");
+	}
+	return 0;
+}
