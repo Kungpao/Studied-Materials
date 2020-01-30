@@ -121,7 +121,7 @@ int _tmain(int argc, _TCHAR* argv[])
 
 		//asking user wether he wants to restar ir exit the program
 		printf("\nPress any key to restart or ESC for exit:\n");
-		exit = _getch(); // делаем кнопку выхода из програмы на энтер
+		exit = _getch(); 
 		if (exit != 27)
 			system("CLS");
 	}
