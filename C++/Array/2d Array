@@ -1,3 +1,5 @@
+----------------------------------------2d array introduction--------------------------------------
+
 #include "stdafx.h"
 
 int _tmain(int argc, _TCHAR* argv[])
@@ -43,3 +45,87 @@ int _tmain(int argc, _TCHAR* argv[])
 	return 0;
 }
 
+-------------------------------Some 2d array practice----------------------------------------
+
+#include "stdafx.h"
+#include <iostream>
+#include <locale.h>
+#include <conio.h>
+#include <time.h>
+#include <stdlib.h>
+#include <malloc.h>
+#include <memory.h>
+
+int main()
+
+{
+
+	//for using kirilica in our programm
+	setlocale(LC_ALL, "RUS");
+
+	//for true random values generation
+	srand(time(0));
+
+	// for restarting program. appointing ESC as exit button to press
+	int exit = 0;
+	while (exit != 27)
+	{
+		// Making 5x5 matrix
+		const int SIZE = 5;
+
+		// declaring 2d array. making it with dyn memory
+		int **par = (int**)malloc(SIZE*sizeof(int*));
+
+		// checking for memory error in malloc
+		if (!par)
+		{
+			printf("ошибка malloc\n");
+			getchar();
+			return 0;
+		}
+
+		// setting memory for each pointer one by one
+		for (int i = 0; i < SIZE; i++)
+		{
+			par[i] = (int*)malloc(SIZE*sizeof(int));
+
+			// not forgeting to check for memory error in malloc
+			if (!par[i])
+			{
+				printf("error malloc\n");
+				getchar();
+				return 0;
+			}
+
+			// setting values to 0
+			memset(par[i], 0, SIZE*sizeof(int));
+		}
+
+		// 2d array loop
+		for (int i = 0; i < SIZE; i++)
+		{
+			for (int j = 0; j < SIZE; j++)
+			{
+				//filling with random values and printing to console
+				par[i][j] = rand() % 100;
+				printf("%d ", par[i][j]);
+			}
+			printf("\n");
+		}
+
+		// freeing memory for colums
+		for (int i = 0; i < SIZE; i++)
+			free(par[i]);
+
+		// freeing memory for array and setting pointer to 0
+		free(par);
+		par = 0;
+
+		//asking user wether he wants to restar ir exit the program
+		printf("\nPress any key to restart or ESC for exit:\n");
+		exit = _getch();
+		if (exit != 27)
+			system("CLS");
+	}
+	return 0;
+}
