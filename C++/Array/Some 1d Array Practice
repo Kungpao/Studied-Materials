@@ -1,0 +1,129 @@
+#include "stdafx.h"
+#include <locale.h>
+#include <conio.h>
+#include <time.h>
+#include <stdlib.h>
+#include <malloc.h>
+#include <memory.h>
+
+int _tmain(int argc, _TCHAR* argv[])
+{
+	//for using kirilica in our programm
+	setlocale(LC_ALL, "RUS");
+
+	//for true random values generation
+	srand(time(0));
+
+	// for restarting program. appointing ESC as exit button to press
+	int exit = 0; 
+	while (exit != 27) 
+	{
+		//Asking for the size of array_1
+		printf("ВВедите размер масива: \n");
+		int size_1 = 0;
+		scanf_s("%d", &size_1);
+
+		//declaring a void pointer for an array
+		void*pv = malloc(size_1*sizeof(int));
+
+		//checking for errors in malloc
+		if (!pv)
+		{
+			printf("Ошибка малок\n");
+			_getch();
+			return 0;
+		}
+
+		// type cast void * to int *
+		int*pvi_1 = (int*)pv; 
+
+		// Setting *pvi with 0 values
+		memset(pvi_1, 0, size_1*sizeof(int));
+
+		// Filling pvi_1 array with random values in range of 0-99
+		for (int i = 0; i < size_1; i++)
+			pvi_1[i] = rand() % 100;
+
+		printf("введите размер второго масив:\n");
+		int size_2 = 0;
+		scanf_s("%d", &size_2);
+
+		// it is better to declare and type cast pointer in the same line. like this. than like before.
+		int *pvi_2 = (int*)malloc(size_2*sizeof(int));
+
+		//checking for errors in malloc
+		if (!pvi_2)
+		{
+			printf("Ошибка малок\n");
+			_getch();
+			return 0;
+		}
+
+		// Setting *pvi with 0 values 
+		memset(pvi_2, 0, size_2*sizeof(int));
+
+		// Filling pvi_2 array with random values in range of 0-99
+		for (int i = 0; i < size_2; i++)
+			pvi_2[i] = rand() % 100;
+
+		//printing both arrays on console
+		printf("Массив1: ");
+		for (int i = 0; i < size_1; i++)
+		{
+			printf("%d ", pvi_1[i]);
+
+		}
+		printf("\n");
+		printf("Массив2: ");
+		for (int i = 0; i < size_2; i++)
+		{
+			printf("%d ", pvi_2[i]);
+
+		}
+		printf("\n");
+
+		//making pvi_1 + pvi_2
+		int*presult = (int*)malloc((size_1 + size_2)*sizeof(int));
+
+		//memory check
+		if (!presult)
+		{
+			printf("ошибка маллок\n");
+			_getch();
+			return 0;
+		}
+
+
+		// making third array wich will consist of numbers from pvi_1 and pvi_2 arrays
+		int count = 0;
+		for (int i = 0; i < size_1; i++, count++)
+			presult[count] = pvi_1[i];
+
+		for (int i = 0; i < size_2; i++, count++)
+			presult[count] = pvi_2[i];
+
+		//printing new array to console
+		printf("Массив1+Массив2: ");
+		for (int i = 0; i < size_1 + size_2; i++)
+		{
+			printf("%d ", presult[i]);
+
+		}
+		printf("\n");
+
+		//freeing memory after use.
+		free(pvi_1);
+		pvi_1 = 0;
+		free(pvi_2);
+		pvi_2 = 0;
+		free(presult);
+		presult = 0;
+
+		//asking user wether he wants to restar ir exit the program
+		printf("\nPress any key to restart or ESC for exit:\n");
+		exit = _getch(); // делаем кнопку выхода из програмы на энтер
+		if (exit != 27)
+			system("CLS");
+	}
+	return 0;
+}
