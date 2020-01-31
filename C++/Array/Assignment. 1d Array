@@ -133,3 +133,126 @@ int main()
 	}
 	return 0;
 }
+
+------------------------------------------------------#3------------------------------------------------
+
+// Make a proggramm, which will combine 2 1d array into new one. Sort it with ascending order. Use dynamic memory for arrays
+
+#include "stdafx.h"
+#include <iostream>
+#include <locale.h>
+#include <conio.h>
+#include <time.h>
+#include <stdlib.h>
+
+//fill arr with rnd values
+void fill_rand_arr(int *arr, const int size)
+{
+	for (size_t i = 0; i < size; i++)
+	{
+		arr[i] = rand() % 10 + 1;
+	}
+}
+//print arr on console
+void print_arr(int *arr, const int size)
+{
+
+	for (size_t i = 0; i < size; i++)
+	{
+		std::cout << arr[i] << " ";
+	}
+	std::cout << std::endl;
+}
+
+int main()
+{
+	//for using kirilica in our programm
+	setlocale(LC_ALL, "RUS");
+
+	//for true random values generation
+	srand(time(0));
+
+	// for restarting program. appointing ESC as exit button to press
+	int exit = 0;
+	while (exit != 27)
+	{
+		// Size for our array
+		const unsigned int SIZE_1 = 10, SIZE_2 = 5;
+		
+		//Declaring 2d arrays, checking it on memory error and setting to 0;
+		int *arr_1 = (int*)malloc(SIZE_1*sizeof(int));
+		if (!arr_1)
+		{
+			std::cout << "Error malloc *arr_1";
+			_getch();
+			return 0;
+		}
+		memset(arr_1, 0, SIZE_1*sizeof(int));
+
+		int *arr_2 = (int*)malloc(SIZE_2*sizeof(int));
+		if (!arr_2)
+		{
+			std::cout << "Error malloc *arr_2";
+			_getch();
+			return 0;
+		}
+		memset(arr_2, 0, SIZE_2*sizeof(int));
+
+		//Filling arrays with random values by utilizing prepared function fill_rand_arr()
+		fill_rand_arr(arr_1, SIZE_1);
+		fill_rand_arr(arr_2, SIZE_2);
+
+		//Showing arrays on console by utilizing prepared function print_arr()
+		printf("Your first array is:\n");
+		print_arr(arr_1, SIZE_1);
+		printf("Your second array is:\n");
+		print_arr(arr_2, SIZE_2);
+
+		//For purpose of combining two arrays i am creating new array with size of SIZE_1+SIZE_2
+		int *arr_3 = (int*)malloc((SIZE_1 + SIZE_2)*sizeof(int));
+
+		//using memcpy_s() to copy elements to the new array
+		memcpy_s(arr_3, (SIZE_1 + SIZE_2)*sizeof(int), arr_1, SIZE_1*sizeof(int));
+
+		//arr_3+SIZE_1 is for values from second array started to fill in from where values of first array is finished being copied
+		memcpy_s(arr_3 + SIZE_1, (SIZE_1 + SIZE_2)*sizeof(int), arr_2, SIZE_2*sizeof(int));
+
+		//freeing memory and setting their pointers to NULL after array usage for first 2 arrays as they aren't needed anymore
+		free(arr_1);
+		arr_1 = NULL;
+		free(arr_2);
+		arr_2 = NULL;
+
+		// Using insertion sort
+		for (size_t i = 0; i < SIZE_1 + SIZE_2; i++)
+		{
+			int j = i;
+
+			while (j > 0 && arr_3[j] < arr_3[j - 1])
+			{
+				int temp = arr_3[j];
+				arr_3[j] = arr_3[j - 1];
+				arr_3[j - 1] = temp;
+				j--;
+			}
+
+		}
+
+		//Printing result
+		printf("Your final, combibed and sorted array is:\n");
+		print_arr(arr_3, SIZE_1 + SIZE_2);
+
+		//freeing memory and setting pointer to NULL after last array usage
+		free(arr_3);
+
+		printf("\n");
+
+		//asking user wether he wants to restar or exit the program
+		printf("\nPress any key to restart or ESC for exit:\n");
+		exit = _getch();
+		if (exit != 27)
+			system("CLS");
+	}
+	return 0;
+}
+
