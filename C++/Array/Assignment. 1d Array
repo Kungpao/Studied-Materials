@@ -1,0 +1,135 @@
+
+------------------------------------------------------#1------------------------------------------------
+
+//Declare array[10] and fill it with random values in range 7..14.
+//Edit  if (value > 19) value = value - 10;
+
+#include "stdafx.h"
+#include <iostream>
+#include <locale.h>
+#include <conio.h>
+#include <time.h>
+#include <stdlib.h>
+
+
+int main()
+{
+	//for using kirilica in our programm
+	setlocale(LC_ALL, "RUS");
+
+	//for true random values generation
+	srand(time(0));
+
+	// for restarting program. appointing ESC as exit button to press
+	int exit = 0;
+	while (exit != 27)
+	{
+		// Size for our array
+		const int SIZE_1 = 10;
+
+		// declaring 1d static array with 0
+		int a[SIZE_1] = { 0 };
+
+		// enabling random values generation
+		srand(time(0)); 
+
+		printf("Your array is:\n\n");
+		//filling with values and printing
+		for (int i = 0; i < SIZE_1; i++) 
+		{
+			//making range 7..14
+			a[i] = 6 + (rand() % 8) + 1;
+
+			//edit
+			if (a[i] > SIZE_1)
+			{
+				// original
+				printf("(%d)", a[i]);
+				a[i] -= 10;
+				//edited
+				printf("%d ", a[i]);
+
+			}
+			else
+			{
+				printf("%d ", a[i]);
+			}
+
+		}
+		printf("\n");
+
+		//asking user wether he wants to restar or exit the program
+		printf("\nPress any key to restart or ESC for exit:\n");
+		exit = _getch();
+		if (exit != 27)
+			system("CLS");
+	}
+	return 0;
+}
+
+------------------------------------------------------#2------------------------------------------------
+
+
+//#2
+//Declare array[50] and fill it with %2 !=0 values in range 1...99
+//
+
+#include "stdafx.h"
+#include <iostream>
+#include <locale.h>
+#include <conio.h>
+#include <time.h>
+#include <stdlib.h>
+
+
+int main()
+{
+	//for using kirilica in our programm
+	setlocale(LC_ALL, "RUS");
+
+	//for true random values generation
+	srand(time(0));
+
+	// for restarting program. appointing ESC as exit button to press
+	int exit = 0;
+	while (exit != 27)
+	{
+		// Size for our array
+		const int SIZE_1 = 50;
+
+		// Declaring 1d static array with 0
+		int arr[SIZE_1] = { 0 }; 
+
+		// Enabling random values generation
+		srand(time(0)); 
+
+		printf("Your array is:\n\n");
+		//filling with values and printing
+		for (int i = 0; i < SIZE_1; i++) 
+		{
+
+			arr[i] = rand() % 100;
+
+			//checking for conditions and showing procces
+			if (arr[i] % 2 != 0)
+			{
+				printf("%d ", arr[i]);
+			}
+			else
+			{
+				printf("(%d)", arr[i]);
+
+			}
+
+		}
+		printf("\n");
+
+
+		//asking user wether he wants to restar or exit the program
+		printf("\nPress any key to restart or ESC for exit:\n");
+		exit = _getch();
+		if (exit != 27)
+			system("CLS");
+	}
+	return 0;
+}
