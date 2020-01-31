@@ -157,16 +157,16 @@ int main()
 	int exit = 0;
 	while (exit != 27)
 	{
-		
+
 		const int SIZE_1 = 3;
 		const int SIZE_2 = 2;
 
 		// declaring 2d array. making it with dyn memory
 		int **par = (int**)malloc(SIZE_1*sizeof(int*));
-		
+
 		// checking for memory error in malloc
 		if (!par)
-		{			
+		{
 			printf("ошибка malloc\n");
 			getchar();
 			return 0;
@@ -176,7 +176,7 @@ int main()
 		// setting memory for each pointer one by one
 		for (int i = 0; i < SIZE_1; i++)
 		{
-			par[i] = (int*)malloc(SIZE_1*sizeof(int));
+			par[i] = (int*)malloc(SIZE_2*sizeof(int));
 
 			// not forgeting to check for memory error in malloc
 			if (!par[i])
@@ -186,7 +186,7 @@ int main()
 				return 0;
 			}
 			// setting values to 0
-			memset(par[i], 0, SIZE_1*sizeof(int));
+			memset(par[i], 0, SIZE_2*sizeof(int));
 		}
 
 		//asking a user to fill values by himself
