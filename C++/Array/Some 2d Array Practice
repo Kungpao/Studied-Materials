@@ -87,4 +87,104 @@ int main()
 
 -------------------------------------------------#2-----------------------------------------------------
 
+// find a maximum sum of values in a 5x5 matrix. by rows
+
+#include "stdafx.h"
+#include <iostream>
+#include <locale.h>
+#include <conio.h>
+#include <time.h>
+#include <stdlib.h>
+
+int main()
+{
+	//for using kirilica in our programm
+	setlocale(LC_ALL, "RUS");
+
+	//for true random values generation
+	srand(time(0));
+
+	// for restarting program. appointing ESC as exit button to press
+	int exit = 0;
+	while (exit != 27)
+	{
+		// Size for our array	
+		const unsigned short int MATRIX_SIZE = 5;
+
+		int sum_max = 0, sum_max_index = 0;
+
+		//Declaring a 2d array. using a malloc
+		int **arr = (int**)malloc(MATRIX_SIZE*sizeof(int*));
+
+		//Check for malloc error
+		if (!arr)
+		{
+			std::cout << "Error **arr" << std::endl;
+			getchar();
+			return 0;
+		}
+
+		//Setting memory for a matrix cols
+		for (size_t i = 0; i < MATRIX_SIZE; i++)
+		{
+			arr[i] = (int*)malloc(MATRIX_SIZE*sizeof(int));
+
+			//Checking for malloc error
+			if (!arr[i])
+			{
+				std::cout << "Error *arr" << std::endl;
+				getchar();
+				return 0;
+			}
+
+			//initializing values with 0
+			memset(arr[i], 0, MATRIX_SIZE*sizeof(int));
+		}
+
+		// Temp storege for sum
+		int sum_temp = 0;
+
+
+		//Setting arr values to rnd values. printing. counting sum.
+		for (size_t i = 0; i < MATRIX_SIZE; i++)
+		{
+			sum_temp = 0;
+			for (size_t j = 0; j < MATRIX_SIZE; j++)
+			{
+				arr[i][j] = rand() % 10 + 1;
+				std::cout << arr[i][j] << " ";
+				sum_temp += arr[i][j];
+			}
+			std::cout << "; sum = " << sum_temp << "; avg = " << (double)(sum_temp / (double)MATRIX_SIZE) << std::endl;
+
+			//Searching for sum_max
+			if (sum_temp > sum_max)
+			{
+				sum_max = sum_temp;
+				sum_max_index = i;
+			}
+		}
+
+		// Showing the result
+		std::cout << "\nThe string with a sum_max_index is = " << sum_max_index << std::endl;
+
+		//freeing memory for arr cols after use
+		for (size_t i = 0; i < MATRIX_SIZE; i++)
+		{
+			free(arr[i]);
+		}
+
+		// Freeing memory for arr and making it NULL value
+		free(arr);
+		arr = NULL;
+		printf("\n");
+
+		//asking user wether he wants to restar or exit the program
+		printf("\nPress any key to restart or ESC for exit:\n");
+		exit = _getch();
+		if (exit != 27)
+			system("CLS");
+	}
+	return 0;
+}
 
