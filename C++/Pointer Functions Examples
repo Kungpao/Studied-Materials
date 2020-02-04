@@ -1,0 +1,151 @@
+#include "stdafx.h"
+
+// Function prototypes
+int Sum(const int &a, const int &b);
+int Mult(const int&, const int&);
+int Div(const int&, const int&);
+int Diff(const int&, const int&);
+
+// Enums
+enum { SUM, MULT, DIV, DIFF };
+
+// Pointer function 
+int(*pSum)(const int &a, const int &b);
+
+// 
+const unsigned short int P_MAS_FUNC_SIZE = 4;
+
+// Pointer function array
+int(*pMasFunc[P_MAS_FUNC_SIZE])(const int&, const int&);
+
+int _tmain(int argc, _TCHAR* argv[])
+{
+	//=================Task#1===========================
+
+	////Example of using pointer function in case scenario
+
+	////asking user to choose operation
+	//printf("0=Sum, 1=Mult, 2=Div, 3 = Diff\nParameters is: '1' and '2'\n");
+	//int vari = 0;
+	//printf("Please choose the operation (0-3):\n");
+	//scanf_s("%d", &vari);
+
+	////Check for user entry
+	//if (vari > 3 || vari < 0)
+	//{
+	//	printf("No such menu!\n");
+	//	return 0;
+	//}
+
+	////switch (vari) Starts
+	//switch (vari)
+	//{
+	//case SUM:
+	//	pSum = Sum;
+	//	printf("1+2=%d\n", pSum(1, 2));
+	//	break;
+	//case MULT:
+	////We can assign any function to a pointer functuion, but only if they are similar signature
+	//	pSum = Mult;
+	//	printf("1*2=%d\n", pSum(1, 2));
+	//	break;
+	//case DIV:
+	//	pSum = Div;
+	//	printf("1:2=%d\n", pSum(1, 2));
+	//	break;
+	//case DIFF:
+	//	pSum = Diff;
+	//	printf("1-2=%d\n", pSum(1, 2));
+	//	break;
+	//}
+	////switch (vari) Ends
+
+	//=================Task#2===========================
+
+	//
+
+
+
+	////asking user to choose operation
+	//printf("0=Sum, 1=Mult, 2=Div, 3 = Diff\nParameters is: '1' and '2'\n");
+	//int vari = 0;
+	//printf("Choose operation:\n");
+	//scanf_s("%d", &vari);
+
+	////Check for user entry
+	//if (vari > 3 || vari < 0)
+	//{
+	//	printf("No such menu!\n");
+	//	return 0;
+	//}
+	////Solving with 'if() case' just because we can
+	//if (vari == SUM)
+	//	pMasFunc[SUM] = Sum;
+	//else if (vari == MULT)
+	//	pMasFunc[MULT] = Mult;
+	//else if (vari == DIV)
+	//	pMasFunc[DIV] = Div;
+	//else if (vari == DIFF)
+	//	pMasFunc[DIFF] = Diff;
+	//else
+	//{
+	//	printf("If() else () Error case");
+	//	return 0;
+	//}
+
+	//// Printing result
+	//printf("Your result is: %d\n", pMasFunc[vari](1, 2));
+
+	//=================Task#3===========================
+
+	/*printf("Printing all functions results by using pointer functions from array\n");
+
+	for (int i = 0; i < P_MAS_FUNC_SIZE; i++)
+	{
+		if (i == SUM)
+		{
+			pMasFunc[SUM] = Sum;
+			printf("Sum of pMasFunc[i](1, 2) is: %d\n", pMasFunc[i](1, 2));
+		}
+		else if (i == MULT)
+		{
+			pMasFunc[MULT] = Mult;
+			printf("Mult of pMasFunc[i](1, 2) is: %d\n", pMasFunc[i](1, 2));
+		}
+		else if (i == DIV)
+		{
+			pMasFunc[DIV] = Div;
+			printf("Div of pMasFunc[i](1, 2) is: %d\n", pMasFunc[i](1, 2));
+		}
+		else if (i == DIFF)
+		{
+			pMasFunc[DIFF] = Diff;
+			printf("Diff of pMasFunc[i](1, 2) is: %d\n", pMasFunc[i](1, 2));
+		}
+		else
+		{
+			printf("error 'for (int i = 0; i < P_MAS_FUNC_SIZE; i++)'");
+			break;
+		}*/
+	/*}*/
+
+	return 0;
+}
+
+//=============== bodyFunctions=========================
+int Sum(const int &a, const int &b)
+{
+	return a + b;
+}
+int Mult(const int&a, const int &b)
+{
+	return a*b;
+}
+int Div(const int&a, const int &b)
+{
+	return a / b;
+}
+int Diff(const int&a, const int &b)
+{
+	return a - b;
+}
