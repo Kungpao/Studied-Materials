@@ -1,4 +1,4 @@
----------------------------------------------#1------------------------------------------------------------
+---------------------------------------------#1 of 5------------------------------------------------------------
 
 //-Make a 5x5 array
 //-ask user to enter number of a row, col and number to save it ubnder apropriate indexes of array in question
@@ -104,3 +104,82 @@ void Exit()
 		system("CLS");
 
 }
+
+---------------------------------------------#2 of 5------------------------------------------------------------
+
+
+//-Make a 3x3 array
+//-ask user to fill it with numbers.
+//-print resulting array 
+
+
+#include "stdafx.h"
+#include <locale.h>
+#include <conio.h>
+#include <stdlib.h>
+
+//function prototype for user to decide either to exit or to restart program after finish
+void Exit();
+
+int _tmain(int argc, _TCHAR* argv[])
+{
+
+	//for using kirilica in our programm
+	setlocale(LC_ALL, "RUS");
+
+	// for restarting program. appointing ESC as exit button to press
+	int exit = 0;
+	while (exit != 27)
+	{
+
+		//Size of a matrix SIZE
+		const unsigned short int SIZE = 3;
+
+		//Declaring 2d static array and setting values to 0
+		int a[SIZE][SIZE] = { 0 };
+
+		//asking user to fill up the array. 
+		printf("Please fill the array with numbers\n");
+		for (int i = 0; i < SIZE; i++)
+		{
+			for (int j = 0; j < SIZE; j++)
+			{
+				printf("a[%d][%d]= ", i, j);
+				scanf_s("%d", &a[i][j]);
+
+				//quick error check
+				if (!a[i][j])
+				{
+					printf("Error! value is not correct!");
+					return 0;
+				}
+			}
+		}
+		
+		// Printig the resulting array
+		printf("Your array is:\n");
+		for (int i = 0; i < SIZE; i++) 
+		{
+			for (int j = 0; j < SIZE; j++) 
+				printf("%d ", a[i][j]);
+			printf("\n");
+		}
+		printf("\n");
+
+		Exit();
+
+	}
+	return 0;
+}
+//function body
+void Exit()
+{
+	printf("\nPress any key to restart or ESC for exit:\n");
+	int exit = _getch();
+	if (exit != 27)
+		system("CLS");
+
+}
+
+---------------------------------------------#3 of 5------------------------------------------------------------
+
