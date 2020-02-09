@@ -188,3 +188,128 @@ int main()
 	return 0;
 }
 
+-------------------------------------------------#3-----------------------------------------------------
+
+#include "stdafx.h"
+#include <locale.h>
+#include <string>
+#include <stdlib.h>
+#include <stdio.h>
+#include <iostream>
+
+// Global variables for using a 2d array as function parametr
+const int G_SIZE = 3;
+const int G_LENGTH = 20;
+
+// Function prototypes
+void SearchName(char[G_SIZE][G_LENGTH], const int*);
+void SearchAge(char[G_SIZE][G_LENGTH], const int*);
+void SortAges(char[G_SIZE][G_LENGTH], int*);
+
+
+int main()
+{
+	setlocale(LC_ALL, "rus");
+
+	//Making static arrays initialized with 0
+	char Names[G_SIZE][G_LENGTH] = { 0 };
+	int Ages[G_SIZE] = { 0 };
+
+	printf("Please fill the array with names (%d) and respectful ages\n", G_SIZE);
+	//Filling arrays from keyboard
+	for (int i = 0; i < G_SIZE; i++)
+	{
+		printf("Enter The Name:\n");
+		gets_s(Names[i], sizeof(Names[i]));
+		printf("Enter The Ages:\n");
+
+		//recieving as char array
+		char age[10] = { 0 };
+		gets_s(age, sizeof(age) - 1);
+
+		//converting to int
+		Ages[i] = atoi(age);
+
+		//clearing the input stream
+		fflush(stdin);
+	}
+
+	//Making an interface
+	printf("1 - Search by Name\n2- Search by Age\n3- Sorting by Names\n");
+	int vari = 0;
+
+	/*scanf_s("%d", &vari); wasn't worked correctly*/
+	/*fflush(stdin); didn't helped. Used C++ input with skip next symbol wich is '\n' */
+	(std::cin >> vari).get();
+	
+
+	//switch (vari) start
+	switch (vari)
+	{
+	case 1:
+		SearchName(Names, Ages);
+		break;
+	case 2:
+		SearchAge(Names, Ages);
+		break;
+	case 3:
+		SortAges(Names, Ages);
+		break;
+	}
+	//switch (vari) end
+	return 0;
+}
+
+//body functions
+void SearchName(char Names[G_SIZE][G_LENGTH], const int *pAges)
+{
+	printf("Please enter the name for Search:\n");
+	/*char name[G_LENGTH] = { 0 };*/
+
+	char name[G_LENGTH] = { 0 };
+	gets_s(name, sizeof(name) - 1);
+
+	for (int i = 0; i < G_SIZE; i++)
+	{
+		if (!strcmp(name, Names[i]))
+		{
+			printf("Name: %s, Age: %d\n", Names[i], pAges[i]);
+			return;
+		}
+	}
+	printf("There is no such person\n");
+}
+void SearchAge(char Names[G_SIZE][G_LENGTH], const int *pAges)
+{
+	printf("Please enter the Age:");
+	int age = 0;
+	scanf_s("%d", &age);
+	for (int i = 0; i < G_SIZE; i++)
+	{
+		if (pAges[i] == age)
+		{
+			printf("Name: %s, Age: %d\n", Names[i], pAges[i]);
+			return;
+		}
+	}
+	printf("There is no such person\n");
+}
+void SortAges(char Names[G_SIZE][G_LENGTH], int *pAges)
+{
+	for (int i = 1; i < G_SIZE; i++)
+	{
+		for (int j = i; j > 0 && pAges[j - 1]>pAges[j]; j--)
+		{
+			char tmp[G_LENGTH] = { 20 };
+			strcpy_s(tmp, sizeof(tmp) - 1, Names[j - 1]);
+			int k = pAges[j - 1];
+			strcpy_s(Names[j - 1], sizeof(Names[j - 1]), Names[j]);
+			pAges[j - 1] = pAges[j];
+			strcpy_s(Names[j], sizeof(Names[j]), tmp);
+			pAges[j] = k;
+		}
+	}
+	for (int i = 0; i < G_SIZE; i++)
+		printf("%s,%d\n", Names[i], pAges[i]);
+}
+
