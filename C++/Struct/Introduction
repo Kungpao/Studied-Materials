@@ -1,0 +1,41 @@
+#include "stdafx.h"
+#include <locale.h>
+#include <string.h>
+#include<stdlib.h>
+
+//making a stuct
+struct Student
+{
+	char Name[20];
+	int Age;
+};
+
+int main()
+{
+	//setting structure parameters
+	Student st = { "Vasya",20 };
+
+	//printing on console
+	printf("st.Name is: %s, st.Age is: %d\n", st.Name, st.Age);
+
+	//checking Structure size
+	printf("This structure Size is: %d\n", sizeof(st));
+
+	//Taking size of name str
+	int len = strnlen(st.Name, sizeof(st.Name));
+
+	printf("Same thing. Printed by Symnbol: ");
+	//printing by symbol
+	for (int i = 0; i < len; i++)
+	{
+		printf("%c", st.Name[i]);
+	}
+	printf("\n");
+
+	//Rewriting name parameter
+	strcpy_s(st.Name, sizeof(st.Name) - 1, "Petya");
+
+	//Showing the result
+	printf("New st.Name is: %s\n", st.Name);
+	return 0;
+}
