@@ -1,0 +1,154 @@
+#include "stdafx.h"
+#include <stdlib.h>
+#include <iostream>
+#include <conio.h>
+
+
+//Making global just to not bother with std::
+using namespace std;
+
+//Declaring a struct
+struct Student
+{
+	//Making string
+	char Name[10];
+	//Making value
+	int Age;
+};
+
+//Making global for use array as function's parametr
+const int SIZE = 5;
+
+//function prototypes
+void SearchName(const Student *);
+void SearchAge(const Student *);
+void SortAge(Student *);
+void PrintStudent(const Student *);
+
+
+int main()
+{
+	Student ar_st[SIZE] = { { "Anna",28 },{ "Katya",23 },{ "Olga",32 },{ "Mari",20 },{ "Deku",17 } };
+	char exit = 0;
+	while (exit != 27)
+	{
+		cout << "0 - Remake all the Names (5)\n1 - Search by Age\n2 - Search by Name\n3 - Sort by Age \n4 - Print on Console\n";
+		unsigned short int menu = 0;
+
+		//Сlearing a input stream. Otherwise switch(menu) will interfare with further inputs
+		(std::cin >> menu).get();
+		
+		//Сosmetic purpose 
+		system("cls");
+
+		//switch(menu) start
+		switch (menu)
+		{
+		case 0:
+		{
+			cout << "\tEnter All(5) Names and Ages\n";
+			for (int i = 0; i < sizeof(ar_st) / sizeof(Student); i++)
+			{
+				printf("Name:\n");
+				scanf_s("%s", &ar_st[i].Name, sizeof(ar_st[i].Name));
+				printf("Age:\n");
+				scanf_s("%d", &ar_st[i].Age);
+			}
+			break;
+		}
+		case 1:
+		{
+			cout << "\tSearch by Ageh\n";
+			SearchAge(ar_st);
+			break;
+		}
+		case 2:
+		{
+			cout << "\tSearch by Name\n";
+			SearchName(ar_st);
+			break;
+		}
+		case 3:
+		{
+			cout << "\tSort by Age\n";
+			SortAge(ar_st);
+			break;
+		}
+		case 4:
+		{
+			cout << "Print on Console\n";
+			for (size_t i = 0; i < SIZE; i++)
+			{
+				PrintStudent(&ar_st[i]);
+			}
+			break;
+		}
+		default:
+		{
+			cout << "No Such Menu\n";
+			break;
+		}
+		}
+		//switch(menu) end
+
+		//asking user wether he wants to restar or exit the program
+		printf("\nPress any key to restart or ESC for exit:\n");
+		exit = _getch();
+		if (exit != 27)
+			system("CLS");
+	}
+
+
+}
+
+//Body functions
+void SearchName(const Student *pSts)
+{
+	printf("Please enter the Name to Search: \n");
+	char name[10] = { 0 };
+	gets_s(name, sizeof(name) - 1);
+	for (int i = 0; i < SIZE; i++)
+	{
+		if (strcmp(name, pSts[i].Name) == 0)
+		{
+			printf("Name %s, Age %d\n", pSts[i].Name, pSts[i].Age);
+			return;
+		}
+	}
+	printf("There is no such Name!");
+}
+void SearchAge(const Student *pStd)
+{
+	printf("Please enter the Age to Search: \n");
+	int age = 0;
+	scanf_s("%d", &age);
+	for (int i = 0; i < SIZE; i++)
+	{
+		if (age == pStd[i].Age)
+		{
+			printf("Name %s, Age %d\n", pStd[i].Name, pStd[i].Age);
+			return;
+		}
+	}
+	printf("There is no such Age!");
+}
+void SortAge(Student *pSt)
+{
+	for (int i = 0; i < SIZE; i++)
+	{
+		for (int j = i; j > 0 && pSt[j - 1].Age>pSt[j].Age; j--)
+		{
+			Student tmp = pSt[j - 1];
+			pSt[j - 1] = pSt[j];
+			pSt[j] = tmp;
+		}
+	}
+	for (int i = 0; i < SIZE; i++)
+	{
+		PrintStudent(&pSt[i]);
+	}
+}
+void PrintStudent(const Student *p)
+{
+	printf("name=%s,Age=%d\n", p->Name, p->Age);
+}
