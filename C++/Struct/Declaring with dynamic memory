@@ -1,0 +1,162 @@
+--------------------------------------------#1 of 2---------------------------------------------------------------------
+
+#include "stdafx.h"
+#include <iostream>
+#include <string.h>
+#include <stdlib.h>
+#include <malloc.h>
+#include <memory.h>
+
+//making struct MobilePhone Shop
+struct Telephone
+{
+	char marka[100]; 
+	int ram; 
+	int flush; 
+	float cost;
+};
+
+//function prototype
+void Print(const Telephone*);
+int main()
+{
+	//Declaring with dynamic memory usage
+	Telephone *ptel = (Telephone*)malloc(sizeof(Telephone));
+
+	//Quick memory avaibility check
+	if (!ptel)
+	{
+		printf("error malloc\n");
+		getchar();
+		return 0;
+	}
+
+	//setting pointer with NULL values
+	memset(ptel, 0, sizeof(Telephone));
+
+	//asking user to enrer the parametrs
+	printf("enter marka:\n");
+	gets_s(ptel->marka, sizeof(ptel->marka));
+	printf("enter ram:\n");
+	scanf_s("%d", &ptel->ram);
+	printf("enter flash:\n");
+	scanf_s("%d", &ptel->flush);
+	printf("enter cost:\n");
+	scanf_s("%f", &ptel->cost);
+
+	//showing result on the screen
+	Print(ptel);
+	
+	//cleaning after dynamic memory usage
+	free(ptel);
+	ptel = NULL;
+
+	return 0;
+}
+
+//function body
+void Print(const Telephone*p)
+{
+	printf("Marka: %s\n", p->marka);
+	printf("Flush: %d\n", p->flush);
+	printf("Ram: %d\n", p->ram);
+	printf("Cost: %f\n", p->cost);
+}
+
+
+--------------------------------------------#2 of 2---------------------------------------------------------------------
+
+#include "stdafx.h"
+#include <iostream>
+#include <locale.h>
+#include <string.h>
+#include <stdlib.h>
+#include <malloc.h>
+#include <memory.h>
+
+//Declaring structs
+struct Person
+{
+	char name[10];
+	int age;
+};
+struct Employee
+{
+	char position[10];
+	Person *p;
+	float salary;
+};
+
+//funciton prototypes
+Employee *Get(void);
+void Print(const Employee*);
+
+int main()
+{
+
+	Employee *pe = Get();
+
+	if (!pe)
+	{
+		printf("error Get\n");
+		getchar();
+		return 0;
+	}
+
+	Print(pe);
+	free(pe);
+	return 0;
+}
+
+//Function body
+Employee *Get(void)
+{
+	//declaring object of a struct with a dynamic memory usage
+	Employee *pointer_employee = (Employee*)malloc(sizeof(Employee));
+	
+	//quick check
+	if (!pointer_employee)
+	{
+		printf("pointer_employee malloc error!\n");
+		return 0;
+	}
+
+	//setting pointer_employee with 0 values
+	memset(pointer_employee, 0, sizeof(Employee));
+	
+	//setting a pointer_employee->p with a dynamic memory as well
+	pointer_employee->p = (Person*)malloc(sizeof(Person));
+
+	//quick check
+	if (!pointer_employee)
+	{
+		free(pointer_employee);
+		return 0;
+	}
+	
+	//Asking user to enter the values
+	printf("enter post:\n");
+	gets_s(pointer_employee->position, sizeof(pointer_employee->position));
+	printf("enter name:\n");
+	gets_s(pointer_employee->p->name, sizeof(pointer_employee->p->name));
+	printf("enter age:\n");
+	scanf_s("%d", &pointer_employee->p->age);
+
+	//Clearing the input stream
+	fflush(stdin);
+
+	//continuing
+	printf("enter salary:\n");
+	scanf_s("%f", &pointer_employee->salary);
+
+	//returning struct
+	return pointer_employee;
+}
+void Print(const Employee*p)
+{
+	printf("Post %s\n", p->position);
+	printf("Name %s\n", p->p->name);
+	printf("Age %d\n", p->p->age);
+	printf("Salary %f\n", p->salary);
+
+}
