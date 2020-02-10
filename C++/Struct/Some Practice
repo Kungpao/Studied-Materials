@@ -1,3 +1,5 @@
+--------------------------------------------------#1 of 3-------------------------------------------------------
+
 #include "stdafx.h"
 #include <stdlib.h>
 #include <iostream>
@@ -152,3 +154,95 @@ void PrintStudent(const Student *p)
 {
 	printf("name=%s,Age=%d\n", p->Name, p->Age);
 }
+
+--------------------------------------------------#2 of 3-------------------------------------------------------
+
+
+#include "stdafx.h"
+#include <iostream>
+#include <locale.h>
+#include <string.h>
+#include <stdlib.h>
+
+	//Making a struct. PC Shop
+	struct Pc
+	{
+		char Cpu[10];
+		char Math[10];
+		float cost;
+	};
+
+	//We can make functions wich will return our structin result
+	Pc GetPc(void);
+
+	int main()
+	{
+		//Declaring
+		Pc pc = GetPc();
+		printf("PC pc is: %s,%s\n", pc.Cpu, pc.Math);
+
+		//We also can make a pointer of it 
+		Pc *p = &pc;
+		printf("PC *p is: %s,%s\n", p->Cpu, p->Math);
+		return 0;
+	}
+
+	//function body
+	Pc GetPc(void)
+	{
+		Pc result = { 0 };
+		printf("Please enter the PCU name:\n");
+		gets_s(result.Cpu, sizeof(result.Cpu));
+		printf("Please enter the motherboard name:\n");
+		gets_s(result.Math, sizeof(result.Math));
+		return result;
+	}
+
+--------------------------------------------------#3 of 3-------------------------------------------------------
+
+#include "stdafx.h"
+#include <locale.h>
+#include <string.h>
+#include<stdlib.h>
+
+//Making multiply structs
+struct Education
+{
+	char university[20];
+};
+struct Card
+{
+	int number;
+};
+struct Person
+{
+	char name[10];
+	Education education;
+	Card cards;
+};
+
+//function prototype
+void Print(const Person&);
+
+int main()
+{
+	Person p = { 0 };
+	printf("Please enter the name:\n");
+	gets_s(p.name, sizeof(p.name));
+	printf("Please enter the education instance:\n");
+	gets_s(p.education.university, sizeof(p.education.university));
+	printf("Please enter the id card number:\n");
+	scanf_s("%d", &p.cards.number);
+	Print(p);
+	return 0;
+}
+
+//function body
+void Print(const Person&pep1)
+{
+	printf("Your entered name is: %s\n", pep1.name);
+	printf("Your entered education instance name is: %s\n", pep1.education.university);
+	printf("Your entered id card number is: %d\n", pep1.cards.number);
+
+}
+
