@@ -1,0 +1,82 @@
+--------------------------------------------#1 0f 2--------------------------------------------
+
+#include "stdafx.h"
+#include <string.h>
+
+int main()
+{
+	//Size of future char array
+	const unsigned short int SIZE = 10;
+
+	//typedef use example
+	typedef char MyString[SIZE];
+	MyString MyStr[SIZE] = { 0 };
+
+	//example of working with typedef
+	//making new string
+	const char *STR = "Hello";
+	
+	//copying str to a MyStr
+	for (int i = 0; i < SIZE; i++)
+		strcpy_s(MyStr[i], sizeof(MyStr[i]) - 1, STR);
+
+	//showing on console result. 
+	for (int i = 0; i < SIZE; i++)
+	{
+		for (int j = 0; j < strlen(MyStr[i]); j++)
+			printf("%c", MyStr[i][j]);
+		printf(" - #%d\n",i+1);
+	}
+
+
+	return 0;
+}
+
+--------------------------------------------#2 0f 2--------------------------------------------
+
+#include "stdafx.h"
+#include <string.h>
+
+//Making a struct
+struct Student
+{
+	char name[10];
+	int age;
+};
+
+//function prototype
+void ShowStruct(struct Student * );
+
+int main()
+{
+	const unsigned short int SIZE= 2;
+	//declaring usual way
+	Student boys[SIZE] = { { "Vasya",20 },{ "Petya",30 } };
+	Student girls[SIZE] = { { "Valya",20 },{ "Petra",25 } };
+
+	printf("ShowStruct(boys) & ShowStruct(girls) result: \n");
+	ShowStruct(boys);
+	ShowStruct(girls);
+
+	printf("\n");
+
+	//typedef
+	typedef Student Boy;
+	typedef Student Girl;
+
+	//declaring by using typedefs
+	Boy MyBoys[SIZE] = { { "Andrey",20 },{ "Sergei",30 } };
+	Girl MyGirls[SIZE] = { { "Natali",20 },{ "Marianna",25 } };
+
+	printf("ShowStruct(MyBoys) &  ShowStruct(MyGirls) result: \n");
+	ShowStruct(MyBoys);
+	ShowStruct(MyGirls);
+
+	return 0;
+}
+
+//function body
+void ShowStruct(struct Student *peops)
+{
+	printf("Struct->name is: %s, Struct->Age is: %d\n", peops->name, peops->age);
+}
