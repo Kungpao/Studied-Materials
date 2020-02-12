@@ -1,0 +1,67 @@
+#include "stdafx.h"
+#include <string.h>
+#include <iostream>
+#include <conio.h>
+
+const int G_SIZE_CC = 10;
+
+//Declaring a Union
+union PayMethod
+{
+	char CreditCardNumber[G_SIZE_CC];
+	int PayCheck;
+};
+
+
+
+//Some enums
+enum { CREDITCARD = 1, PAYCHECK };
+
+int main()
+{
+
+	//Declaring a union member
+	PayMethod  pm;
+
+	//making menu
+	printf("Please choose a payment option:\n");
+	printf("1-CreditCard\n2-PayCheck\n");
+	int option = 0;
+
+	//Сlearing a input stream. Otherwise switch(menu) will interfare with further inputs
+	(std::cin >> option).get();
+	switch (option)
+	{
+	case CREDITCARD:
+		system("CLS");
+		printf("Please enter a CreditCard Number[9]:\n");
+		gets_s(pm.CreditCardNumber, sizeof(pm.CreditCardNumber));
+		break;
+	case PAYCHECK:
+		printf("Please enter a Payment by Cash:\n");
+		scanf_s("%d", &pm.PayCheck);
+		break;
+	default:
+		printf("hernya kakayato\n");
+		break;
+	}
+
+	printf("Done! Press any Key to Continue!\n");
+	_getch();
+	system("CLS");
+
+	//For tracking a union parametr
+	if (option == CREDITCARD)
+		printf("Your CreditCardNumber is: %s\n", pm.CreditCardNumber);
+	else if (option == PAYCHECK)
+	{
+		printf("You Paid in cash: \n");
+		printf("%d$\n", pm.PayCheck);
+		
+		
+	}
+	printf("sizeof(Pay)=%d\n", sizeof(PayMethod));
+
+
+	return 0;
+}
