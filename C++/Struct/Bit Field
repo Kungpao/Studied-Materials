@@ -1,0 +1,72 @@
+#include "stdafx.h"
+#include <iostream>
+#include <string.h>
+#include <memory.h>
+
+//Struct. Bit fields
+struct Bits
+{
+	bool b1 : 1;
+	bool b2 : 1;
+	bool b3 : 1;
+	bool b4 : 1;
+	bool b5 : 1;
+	bool b6 : 1;
+	bool b7 : 1;
+	bool b8 : 1;
+};
+//function prototype
+void PrintCharToBits(const char &);
+int main()
+{
+	char c = 'U';
+	std::cout << "Print char '" << c << "' to Bits: ";
+	PrintCharToBits(c);
+	std::cout << std::endl;
+
+	std::cout << "bit swap: ";
+	c ^= (1 << 2); 
+	PrintCharToBits(c);
+	std::cout << std::endl;
+
+	std::cout << "bit reset: ";
+	c &= ~(1 << 2); 
+	PrintCharToBits(c);
+	std::cout << std::endl;
+
+	std::cout << "bit set: ";
+	c |= (1 << 2); 
+	PrintCharToBits(c);
+	std::cout << std::endl;
+
+	std::cout << "Copy bits to a struct: ";
+	Bits bits;
+	memcpy_s(&bits, sizeof(bits), &c, sizeof(c));
+	printf("%d%d%d%d%d%d%d%d\n", bits.b8, bits.b7, bits.b6, bits.b5, bits.b4, bits.b3, bits.b2, bits.b1);
+	std::cout << std::endl;
+
+	std::cout << "bit inversion: ";
+	bits.b2 = !bits.b2;
+	PrintCharToBits(c);
+	std::cout << std::endl;
+
+	std::cout << "bit reset: ";
+	bits.b2 = false; 
+	PrintCharToBits(c);
+	std::cout << std::endl;
+
+	std::cout << "bit copy: ";
+	char t = 0;
+	memcpy_s(&t, sizeof(t), &bits, sizeof(bits));
+	printf("%c\n", t);
+	std::cout << std::endl;
+
+	return 0;
+}
+//function body
+void PrintCharToBits(const char &c)
+{
+	for (int i = 7; i >= 0; i--)
+		printf("%d", (c >> i) & 1);
+	printf("\n");
+}
