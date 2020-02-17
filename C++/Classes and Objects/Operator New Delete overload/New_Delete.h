@@ -9,10 +9,10 @@ public:
 	~A();
 
 	//operator new overload prototype
-	void *operator new(size_t); // перегрузка оператора new. Нужен Delete еще.
+	void *operator new(size_t); 
 
 	//operator delete overload
-	void operator delete(void *, size_t );// Перегрузка оператора  Delete.
+	void operator delete(void *, size_t );
 
 };
 
