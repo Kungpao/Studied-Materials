@@ -1,0 +1,39 @@
+#pragma once
+template <typename T, size_t r = 5,size_t c=5>
+class MyMatrix
+{
+	T m[r][c];
+	size_t row, col;
+public:
+
+	//Constructor default. receives sizes
+	MyMatrix(void) :row(r), col(c)
+	{
+
+	}
+
+	//Method wich returns rows size
+	const size_t &Rows(void) const
+	{
+		return this->row;
+	}
+
+	//Method wich returns cols size
+	const size_t &Cols(void) const
+	{
+		return this->col;
+	}
+
+	//it is imposible to overload the operator [] for 2d array. We need to use operator () instead.  #1of2. const
+	const T & operator() (const size_t &i,const size_t &j)const 
+	{
+		return this->m[i][j];
+	}
+
+	//Operator () overload. #2of2. no-const
+	T & operator()(const size_t &i, const size_t &j)
+	{
+		return this->m[i][j];
+	}
+
+};
