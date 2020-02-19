@@ -1,0 +1,99 @@
+
+#include "stdafx.h"
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+class A
+{
+	int *p;
+	size_t s;
+
+public:
+	//Constructor default. set 0
+	A(void) :p(nullptr), s(0)
+	{
+
+	}
+	//explicit Constructor with modified range wich takes size, delegetes to default and then set to reveived values
+	explicit A(const size_t &s) :A()
+	{
+		this->s = s;
+		this->p = new int[s];
+		cout << "A(const size_t&)" << endl;
+	}
+
+	//Constructor Copy
+	A(const A&a) :A(a.s) 
+	{
+		memcpy_s(this->p, sizeof(int)*this->s, a.p, a.s*sizeof(int));
+		cout << "A(const A&)" << endl;
+	}
+
+	// operator = 
+	const A &operator = (const A &a)
+	{
+		cout << "operator=" << endl;
+		if (this != &a)
+			delete[] this->p;
+		this->s = a.s;
+		this->p = new int[a.s];
+		memcpy_s(this->p, sizeof(int)*this->s, a.p, sizeof(int)*a.s);
+		return *this;
+	}
+
+	//Destructor
+	~A()
+	{
+		delete[]this->p;
+		cout << "~A" << endl << endl;
+	}
+
+	//Constructor Carryover
+	A(A&&a) :A()
+	{
+		this->p = a.p;
+		this->s = a.s;
+		a.p = nullptr;
+		a.s = 0;
+		cout << "A(A&&a)" << endl;
+	}
+
+	//Operator Carryover
+	const A &operator =(A&a)
+	{
+		cout << "operator=" << endl;
+		if (this != &a)
+			delete[] this->p;
+		this->s = a.s;
+		this->p = a.p;
+		return *this;
+	}
+};
+
+
+int main()
+{
+	cout << "vector<A>v Starting " << endl << endl;
+	vector<A>v;
+
+	cout << "v.push_back(A(100)) Starting " << endl << endl;
+	v.push_back(A(100));
+	
+
+	cout << "v.insert(v.begin(), A(300)) Starting " << endl << endl;
+	v.insert(v.begin(), A(300));// перенос нового элемента в начало.
+
+	cout << "vector<A>v1 Starting " << endl << endl;
+	vector<A>v1;
+
+	cout << "v.push_back(v[0]) Starting " << endl << endl;
+	v1.push_back(v[0]);
+	
+	cout << "v.push_back(A(200000) Starting " << endl << endl;
+	v.push_back(A(200000));
+	
+    return 0;
+}
+
