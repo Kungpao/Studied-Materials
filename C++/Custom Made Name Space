@@ -1,0 +1,62 @@
+// ConsoleApplication12.cpp : Defines the entry point for the console application.
+//
+
+#include "stdafx.h"
+#include <iostream>
+
+
+// namespace making: #1of2
+namespace myName
+{
+	int i = 0;
+	void cout(void);
+}
+
+// namespace #2of2
+namespace myName
+{
+	int j = 0;
+}
+
+// making global variable C++ style
+namespace   
+{
+	int iCount = 0;
+}
+
+// making global variable in a C style
+static int iVar = 0;  
+
+//making avaible only one variable from a custom namespace
+using  myName::j;
+
+//making avaible all of our custom made namespace
+using namespace myName;
+
+	int main()
+	{
+		//accessing i variable
+		myName::i = 15;
+
+		//printing 
+		std::cout << myName::i << std::endl;
+
+		//accessing j variable
+		j++;
+
+		//accessing cout function of custom made namespace
+		myName::cout();
+
+		return 0;
+	}
+
+
+	//function body realization belnging to a custom made namespace. accessing are the same as with variables
+	void myName::cout(void)
+	{
+		
+		std::cout << i << std::endl;
+		std::cout << j << std::endl;
+
+	}
+
