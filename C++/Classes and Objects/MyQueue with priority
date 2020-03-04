@@ -1,0 +1,109 @@
+// Queue with a priority
+
+#include "stdafx.h"
+#include <iostream>
+#include <ctime>
+using namespace std;
+
+class MyQueue
+{
+	// Struct that will be our core
+	struct Node
+	{
+		//value
+		int i;
+		//pointer to the next
+		Node *pNextNode;
+		//value priority
+		int i_priority;
+	};
+	//pointers to the start and end of queue
+	Node *pHead, *pTail;
+
+public:
+
+	MyQueue() :pHead(nullptr), pTail(nullptr) {}
+
+
+	void PushBack(const int &i, const int &i_priority)
+	{
+		//filling struct
+		Node *pNewNode = new Node{ i, nullptr, i_priority };
+
+		//if not yet head, making head and tail the same 
+		if (!this->pHead)
+			this->pHead = this->pTail = pNewNode;
+
+		//otherwise
+		else
+		{
+			// pointers nodes for head an current values
+			Node *pFindNode = this->pHead, *pCurr = this->pHead;
+
+			//sorting by priority value
+			while (pFindNode && pNewNode->i_priority < pFindNode->i_priority)
+			{
+				pCurr = pFindNode;
+				pFindNode = pFindNode->pNextNode;
+			}
+
+			if (pCurr == this->pHead)
+			{
+
+				if (this->pHead->i_priority < pNewNode->i_priority)
+				{
+					pNewNode->pNextNode = this->pHead;
+					this->pHead = pNewNode;
+				}
+
+				else
+				{
+					pNewNode->pNextNode = this->pHead->pNextNode;
+					this->pHead->pNextNode = pNewNode;
+				}
+			}
+
+			else 
+			{
+				pNewNode->pNextNode = pCurr->pNextNode;
+				pCurr->pNextNode = pNewNode;
+			}
+		}
+
+
+	}
+
+	//overloading operator << 
+	friend ostream & operator << (ostream &os, const MyQueue &q)
+	{
+		const Node *p = q.pHead;
+		while (p)
+		{
+			cout << "Value = " << p->i << ", priority = " << p->i_priority << endl;
+			p = p->pNextNode;
+		}
+		return os;
+	}
+};
+
+
+int main()
+{
+	//checking if it is works
+	MyQueue q;
+
+	srand(time(0));
+
+	for (int i = 0; i < 10; i++)
+	{
+		q.PushBack(rand() % 100, rand() % 100);
+	}
+
+	cout << q << endl;
+
+
+
+
+    return 0;
+}
+
