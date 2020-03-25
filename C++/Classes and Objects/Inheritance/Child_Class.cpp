@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "TripleGrafic.h"
+#include "Child.h"
 
 // body realization. setting default values to NULL
 Child::Child()
