@@ -1,0 +1,91 @@
+
+#include "stdafx.h"
+#include <string>
+#include <iostream>
+
+#pragma warning (disable:4996)
+
+int main()
+{
+	//declaring STL string objects in 3 different ways
+	std::string s1 ("hello"); 
+	std::string s2 (100,'\0'); 
+	std::string s3 ("world",3); 
+
+	//printing
+	std::cout << "s1: " << s1 << std::endl << "s2: " << s2 << std::endl << "s3: " << s3 << std::endl;
+	
+	//testing possible iteractions
+	s1 = s2; 
+	std::cout << "s1 = s2: " << s1 << std::endl;
+	s2 = "Hello";
+	std::cout << "s2 = Hello: " << s2 << std::endl;
+	//insert symbol to aproriate position
+	
+	s1.insert(3, s2);
+	std::cout << "s1.insert(3,s2): " << s1 << std::endl;
+	//erase symbol 
+	s1.erase(1, 2);
+	std::cout << "s1.erase(1,2): " << s1 << std::endl;
+	//clearing string
+	s1.clear();
+	std::cout << "s1.Clear: " << s1 << std::endl;
+	//replace string
+	s2.replace(1, 2, "Hello World");
+	std::cout << "s2.replace(1,2,'Hello World'): " << s2 << std::endl;
+	//swap strings
+	s2.swap(s3);
+	std::cout << "s2.swap(s3): " << s2 << std::endl << "s3: " << s3 << std::endl;
+	//add some new strings for example
+	std::string s5 = "C:\\windows\\Temp";
+	//substr string
+	std::string s6 = s5.substr(0, 2);
+	std::cout << "s6 = s5.substr(0,2): " << s6 << std::endl;
+	//typecast to C style string
+	const char *p = s5.c_str();
+	std::cout << "*p= s5.substr(0,2): " << p << std::endl;
+	//addition string
+	s5 += s3;
+	std::cout << "s5+=s3: " << s5 << std::endl;
+	//logical true/false condition
+	std::cout << (p == s5.c_str()) << std::endl;
+	//string copy
+	char strBuf[5] = { 0 };
+	s5.copy(strBuf, sizeof(strBuf) - 1, 1);
+	std::cout << "strBuf[5] = {0}; "<< strBuf << std::endl;
+	//string find symbol
+	size_t pos = s5.find("\\");
+	if (pos != std::string::npos)
+	{
+		std::string s7 = s5.substr(0, pos + 1);
+		std::cout << "s7 = s5.substr(0,pos +1): " << s7 << std::endl;
+	}
+	//one more new string
+	std::string s8 = "c\\test\\1.exe";
+	//search for all .exe files (!!) usefull for search engines
+	pos = s8.rfind('.');
+	if (pos != std::string::npos)
+	{
+		
+		std::cout << "s8.substr(pos+1): " << s8.substr(pos+1) << std::endl;
+	}
+	//compare string
+	std::cout << "s5.compare(3, 0, s8): " << s5.compare(3, 0, s8) << std::endl;
+
+	std::cout << "s5.compare(3, 0, s8,3,0): "<<s5.compare(3, 0, s8,3,0) << std::endl;
+	//new zero values string
+	std::string s10(100, '/0');
+	std::cout << "std::string s10(100, '/0'): " << std::endl;
+	//size string 
+	std::cout << "s10.size(): " << s10.size() << std::endl;
+	//length string
+	std::cout << "s10.length()" << s10.length() << std::endl;
+	//max_size string
+	std::cout << "s10.max_size()" << s10.max_size()<< std::endl;
+	//empty string
+	std::cout << "s10.empty()" << s10.empty() << std::endl;
+
+
+	return 0;
+}
+
