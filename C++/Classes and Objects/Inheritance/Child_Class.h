@@ -1,5 +1,5 @@
 #pragma once
-#include "DoubleGrafic.h"
+#include "Parrent.h"
 
 //inheritance. DoubleGraphic is parent. 
 class Child:public Parrent
