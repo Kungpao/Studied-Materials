@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "DoubleGrafic.h"
+#include "Parrent.h"
 
 // body realization. setting default values to NULL
 Parrent::Parrent():a(0),b(0)
